@@ -1,0 +1,9 @@
+<md-input-container>
+    <input mdInput type="text" #fundcode placeholder="基金代码">
+</md-input-container>
+<button md-button (click)="add(fundcode)">添加</button>
+<md-list dense>
+    <md-list-item *ngFor="let item of items">
+        {{item.gszzl}} {{item.name}}({{item.fundcode}}) {{item.gztime}}
+    </md-list-item>
+</md-list>
