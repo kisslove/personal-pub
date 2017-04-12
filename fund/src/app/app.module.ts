@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {ChartModule} from "angular2-highcharts";
 
-import {MdInputModule,MdButtonModule,MdCardModule,MdListModule} from '@angular/material';
+import {MaterialModule} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -25,11 +25,8 @@ import { HighchartAreaComponent } from './highchart-area/highchart-area.componen
     FormsModule,
     HttpModule,
     ChartModule,
-    MdInputModule,
-    MdButtonModule,
-    MdListModule,
-    BrowserAnimationsModule,
-    MdCardModule
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
