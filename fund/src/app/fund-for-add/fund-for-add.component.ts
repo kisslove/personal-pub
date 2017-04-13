@@ -34,17 +34,20 @@ export class FundForAddComponent implements OnInit {
     });
   }
 
-  refreshItems(code) {
+  refreshItems(e,code) {
+    e.stopPropagation();
     this.fundBasicInfoService.get(code).subscribe(d => {
       if (d.state == 1) {
-        for (var value of this.items) {
+        this.items=this.items.map(value => {
           if (value.fundcode == code) {
-            value = d.data;
-            this.mdSnackBar.open("刷新成功", "关闭", {
-              duration: 1000
-            });
+            return value = d.data;
+          }else{
+            return value;
           }
-        }
+        });
+        this.mdSnackBar.open("刷新成功", "关闭", {
+          duration: 1000
+        });
       }
     });
   }

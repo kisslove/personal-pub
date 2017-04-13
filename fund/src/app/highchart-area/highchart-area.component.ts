@@ -1,61 +1,53 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
-
+import * as Highcharts from 'highcharts';
+import { FundBasicInfoService } from '../fund-for-add/fund-basic-info.service';
 @Component({
   selector: 'app-highchart-area',
   templateUrl: './highchart-area.component.html',
-  styleUrls: ['./highchart-area.component.scss']
+  styleUrls: ['./highchart-area.component.scss'],
+  providers: [FundBasicInfoService]
 })
 export class HighchartAreaComponent implements OnInit, OnChanges {
   @Input()
-  selectedData:Object
-  options:Object
-  constructor() { }
+  selectedData: any
+  constructor(private fundBasicInfoService: FundBasicInfoService) {
+  }
 
   ngOnInit() {
-
+   // this.currentFund=`http://j4.dfcfw.com/charts/pic6/000962.png?v=${Date.now()}`;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.selectedData);
-    this.initHightchart();
+    this.initHightchart(this.selectedData);
+  }
+  flag
+ // currentFund
+  initHightchart(fund) {
+    clearInterval(this.flag);
+   // this.currentFund=`http://j4.dfcfw.com/charts/pic6/${this.selectedData.fundcode}.png?v=${Date.now()}`
+    this.options = {
+      chart: { type: 'spline' },
+      title: { text: '实时数据' },
+      series: [
+        {
+          data: [[this.selectedData.gztime, parseFloat(this.selectedData.gsz)]]
+        }
+      ]
+    };
+    this.flag = setInterval(()=> {
+      this.fundBasicInfoService.get(this.selectedData.fundcode).subscribe(d => {
+        if (d.state == 1) {
+          this.chart.series[0].addPoint([d.data.gztime, parseFloat(d.data.gsz)]);
+        }
+      })
+    }, 1000*60);
+  }
+  options: Object
+  chart: any
+  saveInstance(chartInstance) {
+    this.chart = chartInstance;
   }
 
-  initHightchart() {
-    this.options = {
-      chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-      },
-      title: {
-        text: 'Browser market shares at a specific website, 2014'
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-          }
-        }
-      },
-      series: [{
-        name: 'Brands',
-        data: [
-          { name: 'Microsoft Internet Explorer', y: 56.33 },
-          { name: 'Chrome', y: 24.03 },
-          { name: 'Firefox', y: 10.38 },
-          { name: 'Safari', y: 4.77 },
-          { name: 'Opera', y: 0.91 },
-          { name: 'Proprietary or Undetectable', y: 0.2 }
-        ]
-      }]
-    }
-  }
+
 
 }

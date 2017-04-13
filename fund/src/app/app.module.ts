@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {ChartModule} from "angular2-highcharts";
+import {ChartModule } from "angular2-highcharts";
+import * as something  from 'highcharts';
 
 import {MaterialModule} from '@angular/material';
 
@@ -24,11 +25,11 @@ import { HighchartAreaComponent } from './highchart-area/highchart-area.componen
     BrowserModule,
     FormsModule,
     HttpModule,
-    ChartModule,
+    ChartModule.forRoot(something).ngModule,
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ChartModule.forRoot(something).providers],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,10 @@
 .left-highchart-area {
     display: inline-flex;
-    width: 60%;
+    max-width: 60%;
+    float: left;
 }
 
 .right-fund-area {
     display: inline-flex;
+    float: right;
 }

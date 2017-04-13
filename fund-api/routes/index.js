@@ -27,7 +27,7 @@ router.get('/get', function(req, res, next) {
 
 function getRemoteFund(code) {
     return new Promise(function(resolve, reject) {
-        http.get(`http://fundgz.1234567.com.cn/js/${code}.js`, (res) => {
+        http.get(`http://fundgz.1234567.com.cn/js/${code}.js?t=` + Date.now(), (res) => {
             const statusCode = res.statusCode;
             let error;
             if (statusCode !== 200) {

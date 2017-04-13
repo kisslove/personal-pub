@@ -3,3 +3,11 @@
         cursor: pointer;
     }
 }
+
+.fund-item {
+    color: gray;
+    &:hover {
+        color: #000;
+        cursor: pointer;
+    }
+}
