@@ -48,6 +48,7 @@ export class FundForAddComponent implements OnInit {
         this.mdSnackBar.open("刷新成功", "关闭", {
           duration: 1000
         });
+        window.localStorage['selectedFund'] = JSON.stringify(this.items);
       }
     });
   }

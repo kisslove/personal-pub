@@ -10,16 +10,18 @@ import * as something  from 'highcharts';
 
 import {MaterialModule} from '@angular/material';
 
-
 import { AppComponent } from './app.component';
 import { FundForAddComponent } from './fund-for-add/fund-for-add.component';
 import { HighchartAreaComponent } from './highchart-area/highchart-area.component';
+import {RealtimeDataComponent} from './highchart-area/realtime-data/realtime-data.component';
+import {AppRouterModule} from './app-router.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     FundForAddComponent,
-    HighchartAreaComponent
+    HighchartAreaComponent,
+    RealtimeDataComponent
 ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { HighchartAreaComponent } from './highchart-area/highchart-area.componen
     HttpModule,
     ChartModule.forRoot(something).ngModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRouterModule
   ],
   providers: [ChartModule.forRoot(something).providers],
   bootstrap: [AppComponent]

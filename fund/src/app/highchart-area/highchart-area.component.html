@@ -1,6 +1,12 @@
-<p>
-    <chart [options]="options" (load)="saveInstance($event.context)"></chart>
-</p>
+<md-chip-list>
+    <md-chip (select)="onSelect1" routerLink="fund/{{selectedData.fundcode}}/realtime" routerLinkActive="active">实时数据</md-chip>
+    <md-chip (select)="onSelect2">历史净值</md-chip>
+    <md-chip (select)="onSelect2">基金概况</md-chip>
+    <router-outlet></router-outlet>
+
+</md-chip-list>
+
+<router-outlet></router-outlet>
 
 <!--<p style="text-align: center;">
     <img alt="" src="{{currentFund}}">
