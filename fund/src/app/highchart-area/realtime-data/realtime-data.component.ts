@@ -14,10 +14,10 @@ export class RealtimeDataComponent implements OnInit, OnChanges {
   constructor(private mdSnackBar:MdSnackBar,private fundBasicInfoService: FundBasicInfoService, private route: ActivatedRoute, private router: Router) { }
   fundcode
   ngOnInit() {
-    this.route.params.subscribe((value) => {
+    this.route.params.subscribe((value:any) => {
       this.initHightchart(value.id);
     });
-  }
+  } 
 
   ngOnChanges() {
   }

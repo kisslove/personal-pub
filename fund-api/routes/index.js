@@ -33,12 +33,11 @@ router.get('/gethistory', function(req, res, next) {
         });
     }
     getFundHistory(req.query.code).then(function(d) {
-        // console.log(d);
-        // res.json({
-        //     data: d,
-        //     message: '获取成功',
-        //     state: 1
-        // })
+        res.json({
+            data: d,
+            message: '获取成功',
+            state: 1
+        });
     }, function(err) {
         res.json({
             data: '',
@@ -66,9 +65,10 @@ function getFundHistory(code, page, per, sdate, edate) {
             res.setEncoding('utf8');
             let rawData = '';
             res.on('data', (chunk) => {
-                console.log(chunk.replace(/(^\s*)|(\s*$)/g, ""));
-                //resolve(apidata);
-                // eval(chunk);
+                rawData += chunk;
+            });
+            res.on("end", () => {
+                resolve(rawData.substring(12, rawData.length - 1));
             });
 
         }).on('error', (e) => {

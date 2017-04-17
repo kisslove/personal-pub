@@ -1,6 +1,6 @@
 <md-chip-list>
-    <md-chip (select)="onSelect1" routerLink="fund/{{selectedData.fundcode}}/realtime" routerLinkActive="active">实时数据</md-chip>
-    <md-chip (select)="onSelect2">历史净值</md-chip>
+    <md-chip (select)="onSelect1" routerLink="fund/{{selectedData.fundcode}}/realtime">实时数据</md-chip>
+    <md-chip (select)="onSelect2" routerLink="fund/{{selectedData.fundcode}}/historydata">历史净值</md-chip>
     <md-chip (select)="onSelect2">基金概况</md-chip>
     <router-outlet></router-outlet>
 

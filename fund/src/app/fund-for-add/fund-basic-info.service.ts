@@ -12,6 +12,11 @@ export class FundBasicInfoService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    getHistory(code:string) :Observable<any> {
+        return this.http.get(this.baseUrl+`/fund/getHistory?code=${code}`)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     private extractData(res: Response) {
         return res.json();
     }
