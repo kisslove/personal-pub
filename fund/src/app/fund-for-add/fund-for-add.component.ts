@@ -9,14 +9,18 @@ import { MdSnackBar } from '@angular/material';
 })
 export class FundForAddComponent implements OnInit {
   items: any[] = []
+  selectedData
   constructor(private fundBasicInfoService: FundBasicInfoService, private mdSnackBar: MdSnackBar) { }
   ngOnInit() {
     this.items = window.localStorage['selectedFund'] ? JSON.parse(window.localStorage['selectedFund']) : [];
+    this.selectedData = this.items[0];
   }
 
   @Output()
   selectedFund: EventEmitter<string> = new EventEmitter<string>();
   emitDataToHighchart(item) {
+    this.selectedData = item;
+    window.localStorage['selectedData'] = JSON.stringify(item);
     this.selectedFund.emit(item);
   }
 
@@ -28,20 +32,22 @@ export class FundForAddComponent implements OnInit {
           window.localStorage['selectedFund'] = JSON.stringify(this.items);
           e.value = "";
         } else {
-          alert(`基金:${e.value}已存在`);
+          this.mdSnackBar.open(`基金:${e.value}已存在`, "关闭", {
+            duration: 1000
+          });
         }
       }
     });
   }
 
-  refreshItems(e,code) {
+  refreshItems(e, code) {
     e.stopPropagation();
     this.fundBasicInfoService.get(code).subscribe(d => {
       if (d.state == 1) {
-        this.items=this.items.map(value => {
+        this.items = this.items.map(value => {
           if (value.fundcode == code) {
             return value = d.data;
-          }else{
+          } else {
             return value;
           }
         });

@@ -15,7 +15,7 @@ import { FundForAddComponent } from './fund-for-add/fund-for-add.component';
 import { HighchartAreaComponent } from './highchart-area/highchart-area.component';
 import {RealtimeDataComponent} from './highchart-area/realtime-data/realtime-data.component';
 import {AppRouterModule} from './app-router.module';
-
+ 
 @NgModule({
   declarations: [
     AppComponent,

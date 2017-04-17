@@ -3,10 +3,10 @@
 </md-input-container>
 <button md-button (click)="add(fundcode)">添加</button>
 <md-list dense>
-    <md-list-item class="fund-item" *ngFor="let item of items" (click)="emitDataToHighchart(item)">
-        <md-icon class="material-icons" *ngIf="item.gszzl<0">trending_down</md-icon>
+    <md-list-item [ngClass]="{'actived-state':selectedData.fundcode&&selectedData.fundcode == item.fundcode}" class="fund-item" *ngFor="let item of items" (click)="emitDataToHighchart(item)">
+        <md-icon class="material-icons" [ngStyle]="{color: 'green'}" *ngIf="item.gszzl<0">trending_down</md-icon>
         <md-icon class="material-icons" *ngIf="item.gszzl==0">trending_flat</md-icon>
-        <md-icon class="material-icons" *ngIf="item.gszzl>0">trending_up</md-icon>
+        <md-icon class="material-icons" [ngStyle]="{color: 'red'}" *ngIf="item.gszzl>0">trending_up</md-icon>
         {{item.gszzl}}% {{item.name}}({{item.fundcode}}) {{item.gztime}} &nbsp;
         <md-icon class="material-icons icon-action" (click)="refreshItems($event,item.fundcode)">cached</md-icon>
     </md-list-item>

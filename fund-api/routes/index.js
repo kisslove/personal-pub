@@ -33,7 +33,7 @@ router.get('/gethistory', function(req, res, next) {
         });
     }
     getFundHistory(req.query.code).then(function(d) {
-        console.log(d);
+        // console.log(d);
         // res.json({
         //     data: d,
         //     message: '获取成功',
@@ -66,9 +66,9 @@ function getFundHistory(code, page, per, sdate, edate) {
             res.setEncoding('utf8');
             let rawData = '';
             res.on('data', (chunk) => {
-                console.log(chunk);
+                console.log(chunk.replace(/(^\s*)|(\s*$)/g, ""));
                 //resolve(apidata);
-                eval(chunk);
+                // eval(chunk);
             });
 
         }).on('error', (e) => {
